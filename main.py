@@ -703,7 +703,7 @@ def render_about():
     st.markdown("""
 ### Project Overview
 
-This application is a **Track A – Essential Financial Research Assistant** implementation.
+This application is a **Essential Financial Research Assistant** implementation.
 
 Key Features:
 - Indian stock price analysis using Yahoo Finance (`yfinance`)
@@ -729,5 +729,6 @@ You can explain in viva:
 
 if __name__ == "__main__":
     main()
+
 
 
