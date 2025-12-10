@@ -5,6 +5,7 @@ numpy
 plotly
 textblob
 requests
-sqlite3-binary
+
 python-dateutil
 reportlab
+
