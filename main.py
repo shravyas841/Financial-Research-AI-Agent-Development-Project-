@@ -14,11 +14,9 @@ from reportlab.pdfgen import canvas
 import io
 import os
 
-# =========================
-# BASIC CONFIG / CONSTANTS
-# =========================
 
-# 👉 Put your NewsAPI key here (or leave None and the app will disable news)
+
+
 NEWS_API_KEY = ""  # e.g. "abcd1234..." from https://newsapi.org
 
 INDIAN_MARKET_OPEN = dtime(9, 15)
@@ -27,14 +25,10 @@ INDIAN_MARKET_CLOSE = dtime(15, 30)
 DB_PATH = "financial_agent.db"
 
 
-# =========================
-# UTILS
-# =========================
 
 def get_indian_time_now():
     """Return current time in IST (approx, without external libs)."""
-    # Streamlit/host will generally run in local time; for your laptop (India) this is okay.
-    # If you deploy somewhere else, you can adjust UTC + 5:30 here manually.
+   
     return datetime.now()
 
 
@@ -69,9 +63,7 @@ def make_full_symbol(base_symbol: str, exchange: str):
     return base_symbol
 
 
-# =========================
-# DATA ACCESS: YFINANCE
-# =========================
+
 
 @st.cache_data(show_spinner=False)
 def get_stock_history(symbol: str, period: str = "6mo", interval: str = "1d"):
@@ -100,9 +92,7 @@ def get_stock_info(symbol: str):
         return None
 
 
-# =========================
-# TECHNICAL INDICATORS
-# =========================
+
 
 def compute_rsi(series: pd.Series, period: int = 14):
     delta = series.diff()
@@ -186,9 +176,6 @@ def plot_price_chart(df: pd.DataFrame, symbol: str):
     st.plotly_chart(rsi_fig, use_container_width=True)
 
 
-# =========================
-# NEWS + SENTIMENT
-# =========================
 
 @st.cache_data(show_spinner=False)
 def fetch_news(query: str, api_key: str, page_size: int = 10):
@@ -228,9 +215,7 @@ def analyze_article_sentiment(article):
     return polarity, label
 
 
-# =========================
-# DATABASE (WATCHLIST + PORTFOLIO)
-# =========================
+
 
 def get_connection() -> Connection:
     conn = sqlite3.connect(DB_PATH, check_same_thread=False)
@@ -358,9 +343,7 @@ def compute_portfolio_valuation(df_portfolio: pd.DataFrame):
     return df, total_invested, total_value
 
 
-# =========================
-# EXPORT REPORT (PDF)
-# =========================
+
 
 def generate_pdf_report(symbol: str, df_price: pd.DataFrame, info: dict, df_portfolio_summary: pd.DataFrame = None):
     buffer = io.BytesIO()
@@ -388,7 +371,7 @@ def generate_pdf_report(symbol: str, df_price: pd.DataFrame, info: dict, df_port
             c.drawString(50, y, line)
             y -= 15
 
-    # Price summary
+   
     if df_price is not None and not df_price.empty:
         last_close = df_price["Close"].iloc[-1]
         first_close = df_price["Close"].iloc[0]
@@ -430,9 +413,7 @@ def generate_pdf_report(symbol: str, df_price: pd.DataFrame, info: dict, df_port
     return buffer
 
 
-# =========================
-# SIMPLE "AI-LIKE" COMMENT
-# =========================
+
 
 def simple_text_insight(symbol: str, df: pd.DataFrame, info: dict):
     """Lightweight heuristic explanation (no external LLM, safe for college)."""
@@ -468,7 +449,7 @@ def main():
 
     init_db()
 
-    st.title("📊 AI-Assisted Indian Stock Research (Track A Project)")
+    st.title(" AI-Assisted Indian Stock Research ")
     st.caption("Educational financial research assistant – not investment advice.")
 
     # Sidebar controls
@@ -748,3 +729,4 @@ You can explain in viva:
 
 if __name__ == "__main__":
     main()
+
