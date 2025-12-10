@@ -17,7 +17,7 @@ import os
 
 
 
-NEWS_API_KEY = ""  # e.g. "abcd1234..." from https://newsapi.org
+NEWS_API_KEY = "0e3aad0cee994c12aca607946b26b820" 
 
 INDIAN_MARKET_OPEN = dtime(9, 15)
 INDIAN_MARKET_CLOSE = dtime(15, 30)
@@ -729,4 +729,5 @@ You can explain in viva:
 
 if __name__ == "__main__":
     main()
+
 
