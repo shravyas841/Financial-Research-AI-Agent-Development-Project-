@@ -1,0 +1,12 @@
+.env
+.streamlit/secrets.toml
+*.db
+*.db-journal
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.idea/
+.vscode/
